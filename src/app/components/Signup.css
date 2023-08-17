@@ -1,0 +1,117 @@
+/* Add this CSS to your project's CSS file or style tag */
+.min-h-screen {
+    min-height: 100vh;
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.bg-gray-100 {
+    background-color: #f5f5f5;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.rounded {
+    border-radius: 0.25rem;
+}
+
+.px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.pt-6 {
+    padding-top: 1.5rem;
+}
+
+.pb-8 {
+    padding-bottom: 2rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.w-96 {
+    width: 24rem;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.text-red-500 {
+    color: #e53e3e;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+}
+
+.text-gray-600 {
+    color: #718096;
+}
+
+.text-blue-500 {
+    color: #45a049;
+}
+
+.hover\:underline:hover {
+    text-decoration: underline;
+}
+
+.border {
+    border-width: 1px;
+}
+
+.p-2 {
+    padding: 0.5rem;
+}
+
+.focus\:outline-none:focus {
+    outline: none;
+}
+
+.focus\:border-gray-600:focus {
+    border-color: #45a049;
+}
+
+.bg-blue-500 {
+    background-color: #45a049;
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.hover\:bg-blue-600:hover {
+    background-color: #45a049;
+}

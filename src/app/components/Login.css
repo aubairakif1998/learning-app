@@ -1,0 +1,83 @@
+/* Login.css */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.login-form {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+    padding: 1.5rem 2rem;
+    width: 24rem;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.login-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #cbd5e0;
+    border-radius: 0.25rem;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.login-input:focus {
+    border-color: #45a049;
+}
+
+.error-message {
+    color: #e53e3e;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-button {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #45a049;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.25rem;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.login-button:hover {
+    background-color: #45a049;
+}
+
+.signup-button {
+    color: #45a049;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.signup-button:hover {
+    text-decoration: underline;
+}
+
+/* Add any other styles specific to your project or design preferences */

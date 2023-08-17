@@ -1,113 +1,302 @@
-import Image from 'next/image'
+"use client";
+import Image from "next/image";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Navbar from "@/app/components/Navbar";
+import Sidebar from "@/app/components/Sidebar";
+import Content from "@/app/components/Content";
+import axios from "axios"; // Import the Quiz component
+import type { RootState } from "./store";
+import { setUser, User } from "../slices/userSlice";
+import { useSelector, useDispatch } from "react-redux";
 
-export default function Home() {
+const concepts: Concept[] = [
+  {
+    title: "Introduction to React",
+    content: "React is a JavaScript library for building user interfaces...",
+    urls: [
+      {
+        title: "React Official Documentation",
+        description: "Learn more about React from its official documentation.",
+        link: "https://reactjs.org/docs/getting-started.html",
+        image: "React.png", // Add the path to your image
+      },
+    ],
+  },
+  {
+    title: "React ES6",
+    content: "Learn how to use modern ES6 features with React.",
+    urls: [
+      {
+        title: "ES6 Features",
+        description:
+          "Explore ES6 features like arrow functions, destructuring, and more.",
+        link: "https://www.w3schools.com/js/js_es6.asp",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React Rendering HTML",
+    content: "Understand how React renders HTML elements.",
+    urls: [
+      {
+        title: "React Rendering",
+        description: "Learn about React's rendering process.",
+        link: "https://reactjs.org/docs/rendering-elements.html",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React JSX",
+    content:
+      "JSX is a syntax extension for JavaScript, often used with React to describe what the UI should look like...",
+    urls: [
+      {
+        title: "JSX Introduction",
+        description: "Introduction to JSX syntax and usage.",
+        link: "https://reactjs.org/docs/introducing-jsx.html",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React Components",
+    content: "Components are the building blocks of React applications...",
+    urls: [
+      {
+        title: "Components and Props",
+        description: "Learn about React components and their props.",
+        link: "https://reactjs.org/docs/components-and-props.html",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React Class Components",
+    content:
+      "Class components were the original way to write components in React...",
+    urls: [
+      {
+        title: "React Class Components",
+        description:
+          "Explore React's class components and their lifecycle methods.",
+        link: "https://reactjs.org/docs/react-component.html",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React Props",
+    content: "Props are a way to pass data from parent to child components...",
+    urls: [
+      {
+        title: "Components and Props",
+        description: "Learn about React components and their props.",
+        link: "https://reactjs.org/docs/components-and-props.html",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React Events",
+    content: "React events are named using camelCase instead of lowercase...",
+    urls: [
+      {
+        title: "Handling Events",
+        description: "Learn how to handle events in React components.",
+        link: "https://reactjs.org/docs/handling-events.html",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React Conditionals",
+    content:
+      "Use conditional statements to control the rendering of components...",
+    urls: [
+      {
+        title: "Conditional Rendering",
+        description: "Learn about conditional rendering in React.",
+        link: "https://reactjs.org/docs/conditional-rendering.html",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React Lists",
+    content: "Learn how to render lists of items in React components...",
+    urls: [
+      {
+        title: "Lists and Keys",
+        description: "Guide to rendering lists in React with keys.",
+        link: "https://reactjs.org/docs/lists-and-keys.html",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React Forms",
+    content: "Handle form elements and user input in React applications...",
+    urls: [
+      {
+        title: "Forms",
+        description: "Guide to handling forms in React.",
+        link: "https://reactjs.org/docs/forms.html",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React Router",
+    content: "Learn about routing in React applications...",
+    urls: [
+      {
+        title: "React Router",
+        description: "Explore React Router for navigation.",
+        link: "https://reactrouter.com/web/guides/quick-start",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React Memo",
+    content: "Optimize functional components using React's memoization...",
+    urls: [
+      {
+        title: "React Memo",
+        description:
+          "Guide to using React's memoization for performance optimization.",
+        link: "https://reactjs.org/docs/react-api.html#reactmemo",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React CSS Styling",
+    content: "Learn how to apply CSS styling to React components...",
+    urls: [
+      {
+        title: "Styling and CSS",
+        description: "Guide to styling React components with CSS.",
+        link: "https://reactjs.org/docs/faq-styling.html",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React Sass Styling",
+    content: "Explore using Sass for styling React components...",
+    urls: [
+      {
+        title: "Styling and CSS",
+        description: "Guide to styling React components with CSS.",
+        link: "https://reactjs.org/docs/faq-styling.html",
+        image: "React.png",
+      },
+      {
+        title: "Sass Official Documentation",
+        description: "Learn more about Sass for advanced styling.",
+        link: "https://sass-lang.com/documentation",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React Hooks - useState & useEffect",
+    content:
+      "Learn about React's functional component hooks for state and side effects...",
+    urls: [
+      {
+        title: "Hooks at a Glance",
+        description:
+          "Overview of React hooks, including useState and useEffect.",
+        link: "https://reactjs.org/docs/hooks-overview.html",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React Hooks - useReducer & useRef",
+    content:
+      "Explore more hooks: useReducer for complex state and useRef for accessing DOM elements...",
+    urls: [
+      {
+        title: "Hooks API Reference",
+        description: "Detailed reference for React hooks.",
+        link: "https://reactjs.org/docs/hooks-reference.html",
+        image: "React.png",
+      },
+    ],
+  },
+  {
+    title: "React State Management with Redux",
+    content:
+      "Learn how to manage state in larger React applications using Redux...",
+    urls: [
+      {
+        title: "Redux Official Documentation",
+        description: "Learn more about Redux for state management.",
+        link: "https://redux.js.org/introduction/getting-started",
+        image: "React.png",
+      },
+    ],
+  },
+  // Add more concepts here
+];
+interface Url {
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+}
+
+interface Concept {
+  title: string;
+  content: string;
+  urls: Url[];
+}
+const Documentation: React.FC = () => {
+  const [activeConcept, setActiveConcept] = useState<number>(0);
+
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user.value);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const res = await axios.get("/api/users/me");
+        const userData = res.data.data as User; // Cast userData to User type
+        // Dispatching the setUser action with user data
+        dispatch(setUser(userData));
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+
+    fetchUserDetails(); // Fetch user details when the component mounts
+  }, [dispatch]);
+
+  console.log("State", user);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className="Documentation">
+      <Navbar />
+      <div className="content-container flex">
+        <Sidebar concepts={concepts} setActiveConcept={setActiveConcept} />
+        <div className="flex-1">
+          <Content concept={concepts[activeConcept]} />
+          <div className="fixed bottom-10 right-10">
+            <Link href="/quiz">
+              <button className="bg-green-500 hover:bg-green-600 text-white py-4 px-7 rounded-lg transition-all duration-300 transform hover:scale-105">
+                Take a Quiz
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
+    </div>
+  );
+};
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
-}
+export default Documentation;
