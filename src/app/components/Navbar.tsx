@@ -5,7 +5,7 @@ import { RootState } from "../store";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { User } from "/NEXT JS Learning/client/learning-portal/src/slices/userSlice";
+import { User } from "../models/User";
 import "@/app/components/Navbar.css"; // Add your CSS for the navbar module here
 import { setUser } from "@/slices/userSlice";
 
