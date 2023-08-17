@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import "@/app/components/signup.css";
 export default function SignupPage() {
   const router = useRouter();
   const [user, setUser] = React.useState({
