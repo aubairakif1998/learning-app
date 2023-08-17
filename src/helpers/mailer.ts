@@ -1,2 +1,2 @@
-import nodemailer from 'nodemailer'
-import User from '@/models/userModel'
+// import nodemailer from 'nodemailer'
+// import User from '@/models/userModel'
