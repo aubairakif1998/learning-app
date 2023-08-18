@@ -20,10 +20,11 @@ const Navbar: React.FC = () => {
   const logout = async () => {
     try {
       setLoading(true);
-      await axios.get("/api/users/logout");
-      dispatch(setUser(null)); // Set user state to null on logout
-      toast.success("Logout successful");
-      router.push("/login");
+      await axios.get("/api/users/logout").then(() => {
+        dispatch(setUser(null)); // Set user state to null on logout
+        toast.success("Logout successful");
+        router.push("/login");
+      });
     } catch (error: any) {
       console.log(error.message);
       toast.error(error.message);
