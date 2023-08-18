@@ -144,13 +144,8 @@ function Quiz() {
     return <p>Loading...</p>;
   }
 
-  if (!user) {
-    return <p>Redirecting to main page.</p>;
-  }
-
   return (
     <>
-      <Navbar />
       <div className="quiz">
         <div className="quiz-header">
           <div className="quiz-progress">

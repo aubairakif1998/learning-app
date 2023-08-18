@@ -259,6 +259,7 @@ interface Concept {
 }
 const Documentation: React.FC = () => {
   const [activeConcept, setActiveConcept] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true); // Introduce the loading state
 
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.value);
@@ -270,14 +271,20 @@ const Documentation: React.FC = () => {
         const userData = res.data.data as User; // Cast userData to User type
         // Dispatching the setUser action with user data
         dispatch(setUser(userData));
+        setLoading(false); // Set loading to false once user data is fetched
       } catch (error) {
         console.error("Error fetching user details:", error);
+        setLoading(false); // Set loading to false in case of an error too
       }
     };
 
     fetchUserDetails(); // Fetch user details when the component mounts
   }, [dispatch]);
 
+  // Render loading state if loading is true
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   console.log("State", user);
   return (
     <div className="Documentation">
