@@ -10,7 +10,7 @@ export async function GET() {
         // Clear the "token" cookie by setting its value to an empty string
         response.cookies.set("token", "", {
             httpOnly: true,
-            expires: new Date(0), // Set the expiration to a past date
+
             path: "/", // Adjust the path to match the path where the cookie was set during login
         });
 
