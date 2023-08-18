@@ -11,7 +11,6 @@ export async function GET() {
         response.cookies.set("token", "", {
             httpOnly: true,
 
-            path: "/", // Adjust the path to match the path where the cookie was set during login
         });
 
         return response;
