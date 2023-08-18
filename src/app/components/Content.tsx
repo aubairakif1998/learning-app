@@ -1,7 +1,7 @@
 import React from "react";
 import "@/app/components/Content.css"; // Import the Content CSS module
 import Link from "next/link";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface Url {
   image: string;
@@ -21,6 +21,7 @@ interface ContentProps {
 }
 
 const Content: React.FC<ContentProps> = ({ concept }) => {
+  const router = useRouter();
   return (
     <div className="content">
       <h2>{concept.title}</h2>
@@ -49,12 +50,9 @@ const Content: React.FC<ContentProps> = ({ concept }) => {
         ))}
       </div>
 
-      {/* <button
-        className="startQuizButton"
-        onClick={() => router.push("/quiz")} // Use useRouter to navigate
-      >
-        Start Quiz
-      </button> */}
+      <button className="startQuizButton">
+        <a href="/quiz"> Start Quiz</a>
+      </button>
     </div>
   );
 };

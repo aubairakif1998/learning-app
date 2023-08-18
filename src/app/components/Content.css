@@ -61,4 +61,24 @@
     text-decoration: none;
 }
 
+.learnMoreButton,
+.startQuizButton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.learnMoreButton:hover,
+.startQuizButton:hover {
+    background-color: #28a745;
+}
+
 /* Add any other styles you need */

@@ -10,48 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { User } from "../models/User";
 import axios from "axios";
 import { setUser } from "@/slices/userSlice";
-
-interface Option {
-  id: string;
-  text: string;
-}
-
-interface Question {
-  text: string;
-  options: Option[];
-  correctOption: string;
-}
-
-const questions: Question[] = [
-  {
-    text: "What does JSX stand for?",
-    options: [
-      { id: "1", text: "JavaScript XML" },
-      { id: "2", text: "Java Standard Extension" },
-      { id: "3", text: "JSON XML Syntax" },
-    ],
-    correctOption: "1", // Correct option ID
-  },
-  {
-    text: "Which hook is used to manage side effects in a functional component?",
-    options: [
-      { id: "1", text: "useState" },
-      { id: "2", text: "useEffect" },
-      { id: "3", text: "useContext" },
-    ],
-    correctOption: "2", // Correct option ID
-  },
-  {
-    text: "are Which hook is used to manage side effects in a functional component?",
-    options: [
-      { id: "1", text: "useState" },
-      { id: "2", text: "useEffect" },
-      { id: "3", text: "useContext" },
-    ],
-    correctOption: "2", // Correct option ID
-  },
-  // Add more questions
-];
+import questions from "../constants/questions";
 
 function Quiz() {
   const [isLoading, setIsLoading] = useState(true);
@@ -148,6 +107,10 @@ function Quiz() {
     <>
       <div className="quiz">
         <div className="quiz-header">
+          <div className="user-details">
+            <h1> Email: {user?.email}</h1>
+            <p> ID: {user?._id}</p>
+          </div>
           <div className="quiz-progress">
             {currentQuestion}/{totalQuestions} Questions
           </div>

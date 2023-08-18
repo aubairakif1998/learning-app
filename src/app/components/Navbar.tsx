@@ -40,13 +40,13 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="navbar">
-      {user !== null ? (
-        <div className="logo">
-          <p>{user.username}</p>
-        </div>
-      ) : (
-        <div className="logo">Welcome</div>
-      )}
+      <div className="logo">
+        <img
+          className="h-16 w-16 rounded-full"
+          src="USAMAPROJEC.jpg"
+          alt="Your Company"
+        />{" "}
+      </div>
 
       <ul className="navLinks">
         <li>
