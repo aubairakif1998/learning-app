@@ -38,14 +38,18 @@ const Navbar: React.FC = () => {
     logout();
   };
 
+  const windowWidth = typeof window !== "undefined" ? window.innerWidth : 0;
+
   return (
     <nav className="navbar">
       <div className="logo">
         <img
-          className="h-16 w-16 rounded-full"
-          src="USAMAPROJEC.jpg"
-          alt="Your Company"
-        />{" "}
+          className={windowWidth <= 768 ? "" : "h-12 w-12 rounded-full"}
+          src={windowWidth <= 768 ? `mobile.jpeg` : `desktop.jpeg`}
+          alt={windowWidth <= 768 ? `mobile.jpeg` : `desktop.jpeg`}
+          width={windowWidth <= 768 ? 100 : 100} // Adjust width as needed
+          height={windowWidth <= 768 ? 70 : 90} /// Adjust height as needed
+        />
       </div>
 
       <ul className="navLinks">

@@ -18,6 +18,20 @@ const Documentation: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.value);
 
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const conceptsPerPage = 1; // Number of concepts to show per page
+  const startIndex = currentPage * conceptsPerPage;
+  const endIndex = startIndex + conceptsPerPage;
+  const conceptsToShow = concepts.slice(startIndex, endIndex);
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
@@ -39,13 +53,14 @@ const Documentation: React.FC = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
+
   console.log("State", user);
   return (
-    <div className="Documentation">
+    <>
       <Navbar />
-      <div className="content-container flex">
-        <Sidebar concepts={concepts} setActiveConcept={setActiveConcept} />
-        <div className="flex-1">
+      <div className="Documentation">
+        <div className="">
+          <Sidebar concepts={concepts} setActiveConcept={setActiveConcept} />
           <Content concept={concepts[activeConcept]} />
           <div className="fixed bottom-10 right-10">
             <Link href="/quiz">
@@ -56,7 +71,78 @@ const Documentation: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+
+      <div className="mobileview">
+        <div className="content-container">
+          {/* Pagination buttons */}
+          <div className="pagination">
+            <button
+              onClick={handlePreviousPage}
+              className={
+                currentPage > 0
+                  ? "pagination-button"
+                  : "pagination-button-disabled"
+              }
+              disabled={currentPage === 0}
+            >
+              &lt; Previous
+            </button>
+            <button
+              onClick={handleNextPage}
+              className={
+                endIndex < concepts.length
+                  ? "pagination-button"
+                  : "pagination-button-disabled"
+              }
+              disabled={endIndex >= concepts.length}
+            >
+              Next &gt;
+            </button>
+          </div>
+          {/* Display content */}
+          <div className="content">
+            <h2>{conceptsToShow[activeConcept]?.title}</h2>
+            {conceptsToShow[activeConcept]?.content && (
+              <p>{conceptsToShow[activeConcept]?.content}</p>
+            )}
+            {conceptsToShow[activeConcept]?.urls
+              .slice(0, 1)
+              .map((url, index) => (
+                <div key={index} className="url-item">
+                  <img
+                    src={url?.image}
+                    alt={url?.title}
+                    className="url-image"
+                  />
+                  <a
+                    href={url?.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="url-link"
+                  >
+                    {url?.title}
+                  </a>
+                  <p className="url-description">{url?.description}</p>
+                </div>
+              ))}
+
+            <div className="buttons">
+              <a
+                href={conceptsToShow[activeConcept]?.urls[0]?.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="quiz-button"
+              >
+                Learn More
+              </a>
+              <a href="/quiz" className="quiz-button">
+                Start Quiz
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

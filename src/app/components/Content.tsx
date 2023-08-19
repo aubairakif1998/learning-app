@@ -1,7 +1,9 @@
+// Content.tsx
 import React from "react";
-import "@/app/components/Content.css"; // Import the Content CSS module
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+
+import "@/app/components/Content.css"; // Import the Content CSS module
 
 interface Url {
   image: string;
@@ -22,37 +24,43 @@ interface ContentProps {
 
 const Content: React.FC<ContentProps> = ({ concept }) => {
   const router = useRouter();
+
   return (
     <div className="content">
       <h2>{concept.title}</h2>
       <p>{concept.content}</p>
       <div className="urls">
-        {concept.urls.map((url, index) => (
-          <div key={index} className="url">
+        {concept.urls.length > 0 && (
+          <div className="url">
             <div className="urlImage">
-              <img src={url.image} alt={url.title} />
+              <img src={concept.urls[0].image} alt={concept.urls[0].title} />
             </div>
             <div className="urlDetails">
-              <a href={url.link} target="_blank" rel="noopener noreferrer">
-                {url.title}
-              </a>
-              <p>{url.description}</p>
               <a
-                href={url.link}
+                href={concept.urls[0].link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="learnMoreButton"
               >
-                Learn More
+                {concept.urls[0].title}
               </a>
+              <p>{concept.urls[0].description}</p>
             </div>
           </div>
-        ))}
+        )}
       </div>
-
-      <button className="startQuizButton">
-        <a href="/quiz"> Start Quiz</a>
-      </button>
+      <div className="buttons">
+        <a
+          href={concept.urls[0].link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="learnMoreButton"
+        >
+          Learn More
+        </a>
+        <button className="startQuizButton">
+          <a href="/quiz"> Start Quiz</a>
+        </button>
+      </div>
     </div>
   );
 };

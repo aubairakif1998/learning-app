@@ -12,7 +12,7 @@ interface SidebarProps {
 const Sidebar: FC<SidebarProps> = ({ concepts, setActiveConcept }) => {
   return (
     <div className="sidebar bg-gray-800 text-black py-4 px-2 w-56 md:w-64">
-      <ul className="flex flex-col space-y-2 items-start">
+      <ul className="space-y-2">
         {concepts.map((concept, index) => (
           <li
             key={index}
