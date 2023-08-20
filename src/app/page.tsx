@@ -59,16 +59,20 @@ const Documentation: React.FC = () => {
     <>
       <Navbar />
       <div className="Documentation">
-        <div className="">
+        <div className="sidebarspace">
           <Sidebar concepts={concepts} setActiveConcept={setActiveConcept} />
+        </div>
+        <div className="contentspace">
+          {" "}
           <Content concept={concepts[activeConcept]} />
-          <div className="fixed bottom-10 right-10">
-            <Link href="/quiz">
-              <button className="bg-green-500 hover:bg-green-600 text-white py-4 px-7 rounded-lg transition-all duration-300 transform hover:scale-105">
-                Take a Quiz
-              </button>
-            </Link>
-          </div>
+        </div>
+
+        <div className="fixed bottom-10 right-10">
+          <Link href="/quiz">
+            <button className="bg-green-500 hover:bg-green-600 text-white py-4 px-7 rounded-lg transition-all duration-300 transform hover:scale-105">
+              Take a Quiz
+            </button>
+          </Link>
         </div>
       </div>
 

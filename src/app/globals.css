@@ -8,6 +8,28 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.Documentation {
+  display: flex;
+  align-items: stretch;
+  /* Adjust alignment as needed */
+}
+
+.sidebarspace {
+  flex: 0 0 26%;
+  /* Flex-grow: 0, Flex-shrink: 0, Flex-basis: 30% */
+  /* Add padding for spacing */
+  box-sizing: border-box;
+  /* Include padding in width calculation */
+}
+
+.contentspace {
+  flex: 1;
+  /* Flex-grow: 1, Flex-shrink: 1, Flex-basis: auto */
+  /* Add padding for spacing */
+  box-sizing: border-box;
+  /* Include padding in width calculation */
+}
+
 .app {
   display: flex;
 }

@@ -11,7 +11,7 @@ interface SidebarProps {
 
 const Sidebar: FC<SidebarProps> = ({ concepts, setActiveConcept }) => {
   return (
-    <div className="sidebar bg-gray-800 text-black py-4 px-2 w-56 md:w-64">
+    <div className="sidebar bg-gray-800 text-black py-4 px-2 w-72">
       <ul className="space-y-2">
         {concepts.map((concept, index) => (
           <li
