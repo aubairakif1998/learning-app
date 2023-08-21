@@ -15,7 +15,7 @@ body {
 }
 
 .sidebarspace {
-  flex: 0 0 26%;
+  flex: 0 0 24%;
   /* Flex-grow: 0, Flex-shrink: 0, Flex-basis: 30% */
   /* Add padding for spacing */
   box-sizing: border-box;
