@@ -37,7 +37,7 @@ const Documentation: React.FC = () => {
       try {
         const res = await axios.get("/api/users/me");
         const userData = res.data.data as User; // Cast userData to User type
-        // Dispatching the setUser action with user data
+        console.log(res.data);
         dispatch(setUser(userData));
         setLoading(false); // Set loading to false once user data is fetched
       } catch (error) {
