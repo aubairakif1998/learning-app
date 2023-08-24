@@ -11,7 +11,7 @@ export async function POST(request: NextRequest,) {
     try {
         const userId = await getDataFromToken(request);
         const user = await User.findOne({ _id: userId }).select("-password");
-        if (!user) {
+        if (userId === '' || userId === null) {
             const token = ""
 
             const response = NextResponse.json({
