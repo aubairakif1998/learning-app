@@ -2,13 +2,16 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
     try {
-        const response = NextResponse.json({
-            message: 'Logout successfully',
-            success: true,
-        });
+        const token = ""
 
-        // Clear the "token" cookie by setting its value to an empty string
-        response.cookies.set("token", "", { expires: new Date(Date.now()) });
+        const response = NextResponse.json({
+            message: "Logout successful",
+            success: true,
+        })
+        response.cookies.set("token", token, {
+            httpOnly: true,
+
+        })
         console.log('logout:=>', response.headers)
         return response;
     } catch (error: any) {

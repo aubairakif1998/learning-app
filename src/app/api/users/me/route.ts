@@ -12,13 +12,18 @@ export async function GET(request: NextRequest,) {
         const userId = await getDataFromToken(request);
         const user = await User.findOne({ _id: userId }).select("-password");
         if (!user) {
-            const response = NextResponse.json({
-                message: 'cookies refereshed',
-                success: true,
-            });
+            const token = ""
 
+            const response = NextResponse.json({
+                message: "cookies refereshed",
+                success: true,
+            })
+            response.cookies.set("token", token, {
+                httpOnly: true,
+
+            })
             // Clear the "token" cookie by setting its value to an empty string
-            response.cookies.set("token", "", { expires: new Date(Date.now()) });
+            //response.cookies.set("token", "", { expires: new Date(Date.now()) });
 
         }
         return NextResponse.json({
