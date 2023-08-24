@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
             httpOnly: true,
 
         })
-        // console.log(response)
+        console.log(response)
         return response;
 
     } catch (error: any) {

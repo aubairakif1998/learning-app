@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
     try {
       setLoading(true);
       await axios.get("/api/users/logout").then((res) => {
-        console.log(res);
+        console.log(res.data);
         dispatch(setUser(null)); // Set user state to null on logout
         toast.success("Logout successful");
         router.push("/login");

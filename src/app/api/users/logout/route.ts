@@ -9,7 +9,7 @@ export async function GET() {
 
         // Clear the "token" cookie by setting its value to an empty string
         response.cookies.set("token", "", { expires: new Date(Date.now()) });
-
+        console.log('logout:=>', response.headers)
         return response;
     } catch (error: any) {
         return NextResponse.json({ error: error.message });
