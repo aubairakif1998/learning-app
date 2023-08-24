@@ -8,10 +8,7 @@ export async function GET() {
         });
 
         // Clear the "token" cookie by setting its value to an empty string
-        response.cookies.set("token", "", {
-            httpOnly: true,
-
-        });
+        response.cookies.delete("token");
 
         return response;
     } catch (error: any) {

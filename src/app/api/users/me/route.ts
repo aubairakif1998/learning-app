@@ -6,11 +6,21 @@ import { connect } from "@/dbConfig/dbConfig";
 
 connect();
 
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest,) {
 
     try {
         const userId = await getDataFromToken(request);
         const user = await User.findOne({ _id: userId }).select("-password");
+        if (!user) {
+            const response = NextResponse.json({
+                message: 'cookies refereshed',
+                success: true,
+            });
+
+            // Clear the "token" cookie by setting its value to an empty string
+            response.cookies.delete("token");
+
+        }
         return NextResponse.json({
             mesaaage: "User found",
             data: user
