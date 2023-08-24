@@ -86,7 +86,7 @@ function Quiz() {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const res = await axios.get("/api/users/me");
+        const res = await axios.post("/api/users/me", {});
         const userData = res.data.data as User;
         dispatch(setUser(userData));
       } catch (error) {
