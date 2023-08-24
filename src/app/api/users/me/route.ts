@@ -11,25 +11,27 @@ export async function POST(request: NextRequest,) {
     try {
         const userId = await getDataFromToken(request);
         const user = await User.findOne({ _id: userId }).select("-password");
-        if (userId === '' || userId === null) {
+        if (user === null) {
             const token = ""
+            console.log('USER DATA', user)
 
             const response = NextResponse.json({
                 message: "cookies refereshed",
                 success: true,
+                data: null
             })
-            response.cookies.set("token", token, {
-                httpOnly: true,
-
-            })
+            return response.cookies.delete("token")
             // Clear the "token" cookie by setting its value to an empty string
             //response.cookies.set("token", "", { expires: new Date(Date.now()) });
 
         }
-        return NextResponse.json({
-            mesaaage: "User found",
-            data: user
-        })
+        else {
+            return NextResponse.json({
+                mesaage: "User found",
+                data: user
+            })
+        }
+
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 400 });
     }
