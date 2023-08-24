@@ -18,7 +18,7 @@ export async function GET(request: NextRequest,) {
             });
 
             // Clear the "token" cookie by setting its value to an empty string
-            response.cookies.delete("token");
+            response.cookies.set("token", "", { expires: new Date(Date.now()) });
 
         }
         return NextResponse.json({
