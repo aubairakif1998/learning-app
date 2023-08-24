@@ -35,7 +35,7 @@ const Documentation: React.FC = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const res = await axios.get("/api/users/me");
+        const res = await axios.post("/api/users/me");
         const userData = res.data.data as User; // Cast userData to User type
         console.log(res.data);
         dispatch(setUser(userData));
