@@ -35,9 +35,9 @@ const Documentation: React.FC = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const res = await axios.post("/api/users/me");
+        const res = await axios.post("/api/users/me", {});
         const userData = res.data.data as User; // Cast userData to User type
-        console.log(res.data);
+        console.log(res.data.data);
         dispatch(setUser(userData));
         setLoading(false); // Set loading to false once user data is fetched
       } catch (error) {
